@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <button @click="deleteTimer">删除</button>
+    </div>
+
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            msg: "ssss",
+            timer: null
+        },
+        methods: {
+            deleteTimer() {
+                console.log("vue销毁了");
+                this.$destroy(); //销毁vue
+            }
+        },
+        created() {
+            this.timer = setInterval(() => {
+                this.msg += "abc";
+            }, 1000)
+        },
+
+        // watch 监听属性: 值、对象
+        // key：被监听的变量，可以是data中的  也可以是其他地方的
+        // 当监听的msg 发生变化时，函数触发
+        watch: {
+            msg: function (to, from) {
+                // to是msg变化后的值
+                console.log("被监听数据 变化了");
+                console.log(from);
+                console.log(to);
+            }
+        },
+        destroyed() {
+            clearInterval(this.timer);
+
+        }
+    })
+    // 需求: 某一个值 A 需要随着另一个值 B 的变化而变化
+    // 1、需要知道B的变化，通过监听B修改A----滥用watch
+</script>
+
+</html>

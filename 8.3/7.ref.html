@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 通过ref绑定dom元素,$refs 获取dom 元素 -->
+        <h1 ref = "h1">唐桑强啊</h1>
+        <div ref = "msg">{{msg}}</div>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            msg:"ddd"
+        },
+        methods:{
+            
+        },
+        mounted(){
+            console.log(this.$refs.h1.innerHTML);
+        }
+        
+    })
+</script>
+</html>

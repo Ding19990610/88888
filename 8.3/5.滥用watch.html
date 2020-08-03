@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{z}}</h1>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            x:1,
+            y:1,
+            z:2
+        },
+        // z=x+y,z随着x、y的变化而变化
+        watch:{
+            x:function(val){
+                console.log("x改变了");
+                this.z =val + this.y;
+            },
+            y:function(val){
+                this.z =val + this.x;
+                console.log("y改变了");
+            }
+        },
+        created(){
+            // this.x = 3;
+            setInterval(()=>{
+                this.x +=1;
+                this.y +=2;
+            },1000)
+        },
+        // computed:{
+            // 可以在这  依赖 多个 变量
+        //     sum:function(val){
+        //         return this.x + this.y ;
+        //     }
+        // },
+        methods:{
+
+        },
+
+        // watch  和  computed  的区别？(角度  关键字 :  依赖响应式数据的个数   多个用computed)
+        // watch：监听属性: 可以监听到vue 某个变量值的变化过程，当被监听的响应式数据发生变化时，函数执行
+            // 注意: 只能监听一个响应式数据
+            
+        // computed:计算属性:函数方法体内部,有依赖响应式数据，当依赖的响应式数据发生变化时,函数执行，
+            // 注意:函数体中，可以依赖多个响应式数据
+
+        // 从执行程序:watch:每次只能一个，多个数据要执行多个函数
+                //  computed:可以依赖多个
+        
+        // 对于某一个响应式数据  需要随着多个响应式数据变化而变化时,应该使用computed    避免执行多余的程序
+    })
+</script>
+</html>

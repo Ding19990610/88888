@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{reverseStr()}}</h1>
+        <h2>{{reverseStr1}}</h2>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            msg:"hello world",
+            x:0
+        },
+        methods:{
+            reverseStr(){
+                // console.log(this.x++);
+                return this.msg.split("").reverse().join("");
+            }
+        },
+        // computed：vue的计算属性  值 为对象
+        // key 只是一个普通的属性，不是函数，key赋值 后面函数return 的 返回值
+        computed:{
+            // reverseStr1:计算属性  而非函数
+            reverseStr1:function(){
+            // 函数的执行:
+                // 1、使用了计算属性
+                // 2、再次执行:这个函数中用到的data中数据发生变化时候，会再次执行
+                return this.msg.split("").reverse().join("");
+                console.log("计算属性指执行了");
+            }
+        }
+        // 注意：  不可以给计算属性重新赋值。只可以使用，
+        //         计算属性，只存储当前的状态
+        
+    })
+</script>
+</html>
+<!-- 面试题:  计算属性 和 methods 的区别  (角度  关键字 :  缓存)
+    计算属性:缓存效果L只要有function中 依赖data数据发生变更时: 才会重新执行
+    method: 普通函数  多次执行   每次执行初始化
+
+    computed  性能更好
+
+    计算属性的应用:
+    1、与大量计算有关的内容
+    2、渲染的函数返回值:computed 代替 methods
+
+-->

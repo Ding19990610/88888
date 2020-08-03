@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 1、this.xxx -->
+        <button @click = "a">A事件的this指向</button>
+        <button @click = "b">B事件的this指向</button>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+            a(){
+                console.log(this);
+                // 什么情况下this指向不是vue
+                    //所有的异步处理中的this 
+            },
+            b(){
+                console.log(this); //vue
+                setTimeout(() => {
+                    console.log(this); //vue
+                }, 16.7);
+            }
+        },
+        created(){
+
+        }
+    })
+</script>
+</html>

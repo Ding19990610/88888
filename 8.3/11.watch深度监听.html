@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{student.name}}</h1>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            student: {
+                name: "唐桑",
+                age:88
+            }
+        },
+        methods: {
+
+        },
+        watch: {
+            student: {
+                deep: true, //深度监听对象
+            // 当student
+                handler: function (to) {
+                    console.log(to);
+                    console.log(to.getage);
+                }
+            }
+            // "student.name":function(to){
+            //     console.log("监听到了:" + to);
+            // }
+        },
+        created() {
+            this.student.name = "唐桑强的一批"
+            this.student.age = 99
+
+        }
+
+    })
+</script>
+
+</html>

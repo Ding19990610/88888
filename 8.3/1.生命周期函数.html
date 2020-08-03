@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        1、init时刻，el可以找到id=app的元素
+        这个时候不判断template
+        没有：报错  cannot find elment "#app"
+     -->
+    <div id="app">
+        <!-- 
+            3、如果没有template属性,这个就是vue模板
+                将el指定的#app 编译到 template * 中  并通过render函数 渲染到页面中
+        
+            注意:这里没有实现:数据的响应式绑定，{{msg}}只是一个普通的字符串
+         -->
+    </div>
+    <script>
+        var app = new Vue({
+            // 2、Vue判断是否有template
+            // template 里面也需要有
+            el: "#app",
+            template: `<div id="app">
+                            <h1>{{msg}}</h1>
+                            <button @click = "change">更改</button>
+                        </div>`,
+            data: {
+                msg: "嘻嘻嘻",
+            },
+            destroyed(){
+                // 销毁vue,所有的事件绑定、计算属性、……全部失效
+            }
+        })
+    </script>
+</body>
+
+</html>
+
+<!-- render:
+    响应式数据
+    虚拟dom
+
+    编译需要时间:
+        可能存在问题:
+            1、数据更新了，视图没更新
+            2、有一些操作等待 dom 渲染后 再进行
+                问题: 没有dom 先触发了
+-->

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="box" :style="{styleObj1}"></div>
+        <button @click = "move">move</button>
+        <button @click = "changeWidth">width</button>
+
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            count:0,
+            width:100,
+            styleObj:{
+                marginLeft:0 + "px"
+            }
+        },
+        methods:{
+            move(){
+                ++this.count;
+            },
+            changeWidth(){
+                this.width += 20;
+            }
+        },
+        computed:{
+            styleObj1:function(){
+                let count = this.count;
+                let width = this.width;
+                this.styleObj = {
+                    marginLeft : count * width + "px",
+                    transition:"all 0.5s"
+                }
+                return this.styleObj
+            }
+        }
+    })
+</script>
+</html>

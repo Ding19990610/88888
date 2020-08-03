@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 一个模板  循环反复使用
+            需要一个内容，告诉vue  虽然使用的是一个模板，但是数据不用，视图是需要更新的
+
+            告诉vue模板相同、数据不同；应该提高 虚拟dom的更新效率
+        -->
+        <div v-for = "item in list" key = "item.id">
+            <p>{{item.name}}</p>
+            <p>{{item.age}}</p>
+        </div>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            list:[
+                {name:"ts",age:18,id:1},
+                {name:"ts",age:18,id:2},
+                {name:"ts",age:18,id:3}
+            ]
+        },
+        methods:{
+
+        },
+        created(){
+            this.list[0].name = "唐桑"
+        }
+    })
+</script>
+</html>
+<!-- 
+    在编译之前
+
+    1、获取模板
+    2、将模板 变为 虚拟dom
+    3、将虚拟dom 变为模板 进行编译
+    
+
+    vue更新虚拟dom， 将新的模板与旧的模板比较，更新虚拟dom 进行渲染
+
+ -->
